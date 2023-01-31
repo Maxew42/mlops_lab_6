@@ -27,14 +27,20 @@ pipeline {
             steps {   
                 sh """
                     docker build -t maxew42/fashion-mnist:latest .
-                    docker run -d -p 8012:8012 maxew42/fashion-mnist:latest
                 """
-                catchError {
-                    sh """
-                        docker stop maxew42/fashion-mnist:latest
-                        docker run -d -p 8012:8012 maxew42/fashion-mnist:latest
-                    """
+                script {
+                    try {
+                        sh """
+                            docker stop maxew42/fashion-mnist:latest
+                        """
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
                 }
+
+                sh """
+                    docker run -d -p 8012:8012 maxew42/fashion-mnist:latest 
+                """
             }
         }
     
