@@ -27,7 +27,7 @@ pipeline {
             steps {   
                 sh """
                     docker build -t maxew42/fashion-mnist:latest .
-                    docker run -p 5000:5000 maxew42/fashion-mnist:latest
+                    docker run -p 8012:8012 maxew42/fashion-mnist:latest
                 """
 
             }
