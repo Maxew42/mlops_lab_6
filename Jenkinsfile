@@ -32,12 +32,9 @@ pipeline {
                 catchError {
                     sh """
                         docker stop maxew42/fashion-mnist:latest
+                        docker run -d -p 8012:8012 maxew42/fashion-mnist:latest
                     """
                 }
-                sh """
-                    docker run -d -p 8012:8012 maxew42/fashion-mnist:latest
-                """
-
             }
         }
     
